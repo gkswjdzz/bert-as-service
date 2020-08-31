@@ -28,6 +28,8 @@ Learn how to use Jina to extract feature vector using any deep learning represen
 
 <h1 align="center">bert-as-service</h1>
 
+[![Run on Ainize](https://ainize.ai/images/run_on_ainize_button.svg)](https://ainize.web.app/redirect?git_repo=https://github.com/gkswjdzz/bert-as-service)
+
 <p align="center">Using BERT model as a sentence encoding service, i.e. mapping a variable-length sentence to a fixed-length vector.</p>
 
 <p align="center">
