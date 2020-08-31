@@ -5,14 +5,14 @@ info:
   description: API to encode sentence or tokens to vectors
   termsOfService: http://swagger.io/terms/
   contact:
-    name: Filip Bednárik
+    name: Filip BednÃ¡rik
     email: info@ardevop.sk
     url: https://ardevop.sk
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: http://localhost:8125/
+  - url: https://master-bert-as-service-gkswjdzz.endpoint.ainize.ai
 paths:
   /encode:
     post:
