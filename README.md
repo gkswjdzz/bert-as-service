@@ -1,30 +1,6 @@
 
 <h2 align="center">Are you looking for X-as-service? Try <a href="https://github.com/jina-ai/jina">Jina</a>!</h2>
 <h4 align="center">where X can be albert, pytorch-transformer, vgg, resnet, videobert, or <b>ANY</b> deep learning representation model?</h4>
-<table>
-  <tr><a href="https://github.com/jina-ai/jina"><img src="https://github.com/jina-ai/jina/blob/master/.github/1500х667.gif?raw=true" alt="Jina banner" width="100%"></a></tr>
-  <tr>
-      <td width="30%">
-    <a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101">
-      <img src="https://github.com/jina-ai/jina/blob/master/docs/chapters/101/img/ILLUS12.png?raw=true" alt="Jina 101 Concept Illustration Book, Copyright by Jina AI Limited" title="Jina 101 Concept Illustration Book, Copyright by Jina AI Limited"/>
-    </a>
-    </td>
-    <td width="70%">
-<h3><a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101">► Jina 101: First Thing to Learn About Jina</a></h3>
-&nbsp;&nbsp;<a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101">English</a> •
-  <a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101/README.ja.md">日本語</a> •
-  <a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101/README.fr.md">français</a> •
-  <a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101/README.de.md">Deutsch</a> •
-  <a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101/README.ru.md">Русский язык</a> •
-  <a href="https://github.com/jina-ai/jina/tree/master/docs/chapters/101/README.zh.md">中文</a>
-<br>
-    <h3><a href="https://github.com/jina-ai/examples/tree/master/x-as-service">► From BERT-as-Service to X-as-Service</a></h3>
-Learn how to use Jina to extract feature vector using any deep learning representation	
-
-</td>
-  </tr>
-</table>
-
 
 <h1 align="center">bert-as-service</h1>
 
@@ -75,7 +51,7 @@ Learn how to use Jina to extract feature vector using any deep learning represen
 </p>
 
 <p align="center">
-    <img src=".github/demo.gif?raw=true" width="700">
+    <img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/demo.gif" style="width: 90%">
 </p>
 
 <h6 align="center">Made by Han Xiao • :globe_with_meridians: <a href="https://hanxiao.github.io">https://hanxiao.github.io</a></h6>
@@ -146,7 +122,7 @@ bert-serving-start -model_dir /tmp/english_L-12_H-768_A-12/ -num_worker=4
 This will start a service with four workers, meaning that it can handle up to four **concurrent** requests. More concurrent requests will be queued in a load balancer. Details can be found in our [FAQ](#q-what-is-the-parallel-processing-model-behind-the-scene) and [the benchmark on number of clients](#speed-wrt-num_client).
 
 Below shows what the server looks like when starting correctly:
-<p align="center"><img src=".github/server-demo.gif?raw=true"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/server-demo.gif?raw=true"  style="width: 90%"/></p>
 
 <details>
  <summary>Alternatively, one can start the BERT Service in a Docker Container (click to expand...)</summary>
@@ -175,7 +151,7 @@ bc.encode(['First do it ||| then do it right'])
 ```
 
 Below shows what the server looks like while encoding:
-<p align="center"><img src=".github/server-run-demo.gif?raw=true"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/server-run-demo.gif?raw=true"  style="width: 90%"/></p>
 
 #### Use BERT Service Remotely
 One may also start the service on one (GPU) machine and call it from another (CPU) machine as follows:
@@ -336,7 +312,7 @@ while True:
 ```
 
 That's it! Now run the code and type your query, see how this search engine handles fuzzy match:
-<p align="center"><img src=".github/qasearch-demo.gif?raw=true"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/qasearch-demo.gif?raw=true" style="width: 90%"/></p>
 
 ### Serving a fine-tuned BERT model
 
@@ -370,7 +346,8 @@ Don't be afraid of those mysterious files, as the only important one to us is `m
 Now start a BertServer by putting three pieces together:
 
 ```bash
-bert-serving-start -model_dir=/pretrained/uncased_L-12_H-768_A-12 -tuned_model_dir=/tmp/mrpc_output/ -ckpt_name=model.ckpt-343
+bert-serving-start -model_dir=/pretrained/uncased_L-12_H-768_A-12 -tuned_model_dir=/tmp/mrpc_output/ \
+ -ckpt_name=model.ckpt-343
 ```
 
 After the server started, you should find this line in the log:
@@ -528,7 +505,9 @@ estimator = DNNClassifier(
 input_fn = lambda fp: (tf.data.TextLineDataset(fp)
                        .apply(tf.contrib.data.shuffle_and_repeat(buffer_size=10000))
                        .batch(batch_size)
-                       .map(lambda x: tf.py_func(get_encodes, [x], [tf.float32, tf.string]), num_parallel_calls=num_parallel_calls)
+                       .map(lambda x: tf.py_func(
+                                get_encodes, [x], [tf.float32, tf.string]
+                            ), num_parallel_calls=num_parallel_calls)
                        .map(lambda x, y: ({'feature': x}, y))
                        .prefetch(20))
 
@@ -662,7 +641,7 @@ This will allow one to use javascript or `curl` to fetch the server status at po
 
 `plugin/dashboard/index.html` shows a simple dashboard based on Bootstrap and Vue.js.
 
-<p align="center"><img src=".github/dashboard.png?raw=true"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/dashboard.png?raw=true"  style="width: 90%"/></p>
 
 ### Using `bert-as-service` to serve HTTP requests in JSON
 
@@ -802,9 +781,9 @@ bert-serving-start -pooling_layer -4 -3 -2 -1 -model_dir /tmp/english_L-12_H-768
 
 **A:** It depends. Keep in mind that different BERT layers capture different information. To see that more clearly, here is a visualization on [UCI-News Aggregator Dataset](https://www.kaggle.com/uciml/news-aggregator-dataset), where I randomly sample 20K news titles; get sentence encodes from different layers and with different pooling strategies, finally reduce it to 2D via PCA (one can of course do t-SNE as well, but that's not my point). There are only four classes of the data, illustrated in red, blue, yellow and green. To reproduce the result, please run [example7.py](example/example7.py).
 
-<p align="center"><img src=".github/pool_mean.png?raw=true"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/pool_mean.png?raw=true" style="width: 90%"></p>
 
-<p align="center"><img src=".github/pool_max.png?raw=true"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/pool_max.png?raw=true" style="width: 90%"></p>
 
 Intuitively, `pooling_layer=-1` is close to the training output, so it may be biased to the training targets. If you don't fine tune the model, then this could lead to a bad representation. `pooling_layer=-12` is close to the word embedding, may preserve the very original word information (with no fancy self-attention etc.). On the other hand, you may achieve the very same performance by simply using a word-embedding only. That said, anything in-between [-1, -12] is then a trade-off. 
 
@@ -845,7 +824,7 @@ To reproduce the results, please run `bert-serving-benchmark`.
 
 ##### **Q:** What is the parallel processing model behind the scene?
 
-<img src=".github/bert-parallel-pipeline.png?raw=true" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/bert-parallel-pipeline.png?raw=true" style="width: 90%">
 
 ##### **Q:** Why does the server need two ports?
 One port is for pushing text data into the server, the other port is for publishing the encoded result to the client(s). In this way, we get rid of back-chatter, meaning that at every level recipients never talk back to senders. The overall message flow is strictly one-way, as depicted in the above figure. Killing back-chatter is essential to real scalability, allowing us to use `BertClient` in an asynchronous way. 
@@ -959,7 +938,7 @@ if cosine(A, B) > cosine(A, C), then A is more similar to B than C.
 
 The graph below illustrates the pairwise similarity of 3000 Chinese sentences randomly sampled from web (char. length < 25). We compute cosine similarity based on the sentence vectors and [Rouge-L](https://en.wikipedia.org/wiki/ROUGE_(metric)) based on the raw text. The diagonal (self-correlation) is removed for the sake of clarity. As one can see, there is some positive correlation between these two metrics.
 
-<p align="center"><img src=".github/cosine-vs-rougel.png?raw=true"/></p>   
+<p align="center"><img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/cosine-vs-rougel.png?raw=true" style="width: 90%"/></p>   
 
 
 ##### **Q:** I'm getting bad performance, what should I do?
@@ -1012,7 +991,7 @@ Common arguments across all experiments are:
 
 Performance-wise, longer sequences means slower speed and  more chance of OOM, as the multi-head self-attention (the core unit of BERT) needs to do dot products and matrix multiplications between every two symbols in the sequence.
 
-<img src=".github/max_seq_len.png?raw=true" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/max_seq_len.png?raw=true" style="width: 90%">
 
 | `max_seq_len` | 1 GPU | 2 GPU | 4 GPU |
 |---------------|-------|-------|-------|
@@ -1045,7 +1024,7 @@ for s in my_corpus.iter():
 
 It's even worse if you put `BertClient()` inside the loop. Don't do that.
 
-<img src=".github/client_batch_size.png?raw=true" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/client_batch_size.png?raw=true" style="width: 90%">
 
 | `client_batch_size` | 1 GPU | 2 GPU | 4 GPU |
 |---------------------|-------|-------|-------|
@@ -1065,7 +1044,7 @@ It's even worse if you put `BertClient()` inside the loop. Don't do that.
 #### Speed wrt. `num_client`
 `num_client` represents the number of concurrent clients connected to the server at the same time.
 
-<img src=".github/num_clients.png?raw=true" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/num_clients.png?raw=true" style="width: 90%">
 
 | `num_client` | 1 GPU | 2 GPU | 4 GPU |
 |--------------|-------|-------|-------|
@@ -1083,7 +1062,7 @@ As one can observe, 1 clients 1 GPU = 381 seqs/s, 2 clients 2 GPU 402 seqs/s, 4 
 
 `max_batch_size` is a parameter on the server side, which controls the maximum number of samples per batch per worker. If a incoming batch from client is larger than `max_batch_size`, the server will split it into small batches so that each of them is less or equal than `max_batch_size` before sending it to workers.
 
-<img src=".github/max_batch_size.png?raw=true" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/max_batch_size.png?raw=true" style="width: 90%">
 
 | `max_batch_size` | 1 GPU | 2 GPU | 4 GPU |
 |------------------|-------|-------|-------|
@@ -1098,7 +1077,7 @@ As one can observe, 1 clients 1 GPU = 381 seqs/s, 2 clients 2 GPU 402 seqs/s, 4 
 
 `pooling_layer` determines the encoding layer that pooling operates on. For example, in a 12-layer BERT model, `-1` represents the layer closed to the output, `-12` represents the layer closed to the embedding layer. As one can observe below, the depth of the pooling layer affects the speed.
 
-<img src=".github/pooling_layer.png?raw=true" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/pooling_layer.png?raw=true" style="width: 90%">
 
 | `pooling_layer` | 1 GPU | 2 GPU | 4 GPU |
 |-----------------|-------|-------|-------|
@@ -1126,7 +1105,7 @@ As one can observe, 1 clients 1 GPU = 381 seqs/s, 2 clients 2 GPU 402 seqs/s, 4 
 
 On Tesla V100 with `tensorflow=1.13.0-rc0` it gives:
 
-<img src=".github/fp16-xla.svg" width="600">
+<img src="https://raw.githubusercontent.com/hanxiao/bert-as-service/master/.github/fp16-xla.svg"  style="width: 90%">
 
 FP16 achieves ~1.4x speedup (round-trip) comparing to the FP32 counterpart. To reproduce the result, please run `python example/example1.py`.
 
